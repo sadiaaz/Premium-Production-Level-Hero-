@@ -131,6 +131,18 @@ body.fade-out {
 
 <script>
 
+    window.addEventListener("scroll", function() {
+    const hero = document.querySelector(".hero");
+
+    if (window.scrollY > 100) {
+        hero.style.transform = "scale(0.95)";
+        hero.style.transition = "0.5s ease";
+    } else {
+        hero.style.transform = "scale(1)";
+    }
+});
+ 
+
 /* ====== RIPPLE FROM CURSOR POSITION ====== */
 document.querySelector(".hero-clickable-state").addEventListener("click", function(e) {
 
@@ -161,3 +173,4 @@ C:\Users\Lenovo\OneDrive\Documents\html work\index.html
 
 </body>
 </html>
+
