@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium Hero</title>
+
+<style>
+
+/* ====== GLOBAL SMOOTH PAGE FADE ====== */
+body {
+    margin: 0;
+    opacity: 1;
+    transition: opacity 0.6s ease;
+    font-family: Arial, sans-serif;
+}
+
+body.fade-out {
+    opacity: 0;
+}
+
+/* ====== SWIPER COMPATIBLE HERO ====== */
+.hero {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero-slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url("https://w0.peakpx.com/wallpaper/110/397/HD-wallpaper-xiaomi-android-mobile-phone-2019.jpg") center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ====== PREMIUM GLASS OVERLAY ====== */
+.hero-slide::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.35);
+    transition: backdrop-filter 0.5s ease, background 0.5s ease;
+}
+
+.hero-slide:hover::before {
+    backdrop-filter: blur(15px);
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* ====== CONTENT ====== */
+.hero-content {
+    position: relative;
+    z-index: 5;
+    color: white;
+    text-align: center;
+    transform: translateY(40px);
+    opacity: 0;
+    animation: cinematicFade 1.2s ease forwards;
+}
+
+@keyframes cinematicFade {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* ====== FULL CLICKABLE OVERLAY ====== */
+.hero-clickable-state {
+    position: absolute;
+    inset: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 10;
+    overflow: hidden;
+}
+
+/* ====== CURSOR RIPPLE EFFECT ====== */
+.hero-clickable-state span {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    background: rgba(255,255,255,0.6);
+    animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<section class="hero">
+    <div class="hero-slide">
+
+        <div class="hero-content">
+            <h1>Pre-registration for New Galaxy</h1>
+            <p>Experience the future today.</p>
+        </div>
+
+        <button 
+            class="hero-clickable-state"
+            aria-label="Pre-registration for New Galaxy"
+            onclick="smoothRedirect(event, 'https://example.com')">
+        </button>
+
+    </div>
+</section>
+
+<script>
+
+/* ====== RIPPLE FROM CURSOR POSITION ====== */
+document.querySelector(".hero-clickable-state").addEventListener("click", function(e) {
+
+    let circle = document.createElement("span");
+    let diameter = Math.max(this.clientWidth, this.clientHeight);
+    let radius = diameter / 2;
+
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${e.clientX - this.offsetLeft - radius}px`;
+    circle.style.top = `${e.clientY - this.offsetTop - radius}px`;
+
+    this.appendChild(circle);
+
+    setTimeout(() => circle.remove(), 600);
+});
+
+/* ====== SMOOTH PAGE REDIRECT ====== */
+function smoothRedirect(event, url) {
+    event.preventDefault();
+    document.body.classList.add("fade-out");
+
+    setTimeout(() => {
+        window.location.href = url;
+    }, 600);
+}
+C:\Users\Lenovo\OneDrive\Documents\html work\index.html
+</script>
+
+</body>
+</html>
